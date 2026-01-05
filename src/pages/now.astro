@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lastUpdated = 'January 2024';
+---
+
+<BaseLayout
+  title="Now - Your Name"
+  description="What I'm currently working on"
+>
+  <div class="max-w-4xl mx-auto px-6 py-16">
+    <article class="prose">
+      <h1 class="mb-4">What I'm Doing Now</h1>
+
+      <p class="text-sm text-text-muted mb-12">
+        Last updated: {lastUpdated}
+      </p>
+
+      <div class="space-y-6 text-text">
+        <p class="text-xl text-text-muted leading-relaxed">
+          A snapshot of what I'm currently focused on.
+        </p>
+
+        <h2 class="mt-12 mb-4">Work</h2>
+
+        <p>
+          Building web applications and improving my TypeScript skills. Currently
+          exploring Astro for content-heavy sites and loving how fast and simple
+          it is compared to heavier frameworks.
+        </p>
+
+        <h2 class="mt-12 mb-4">Learning</h2>
+
+        <ul class="space-y-2">
+          <li>Design systems and component architecture</li>
+          <li>Advanced TypeScript patterns</li>
+          <li>Typography and vertical rhythm in web design</li>
+          <li>Building in public and content creation</li>
+        </ul>
+
+        <h2 class="mt-12 mb-4">Projects</h2>
+
+        <p>
+          Working on a distraction-free markdown editor (see Projects timeline).
+          Also experimenting with generative art using CSS and canvas.
+        </p>
+
+        <h2 class="mt-12 mb-4">Reading</h2>
+
+        <ul class="space-y-2">
+          <li>
+            <em>The Design of Everyday Things</em> by Don Norman
+          </li>
+          <li>
+            Various blog posts about indie hacking and sustainable solo development
+          </li>
+        </ul>
+
+        <h2 class="mt-12 mb-4">Life</h2>
+
+        <p>
+          Trying to maintain a better work-life balance. Going for daily walks,
+          reading more physical books, and spending less time on social media.
+        </p>
+
+        <div class="mt-12 p-6 bg-surface rounded-lg border border-border">
+          <p class="text-sm text-text-muted mb-0">
+            This page is inspired by Derek Sivers'
+            <a
+              href="https://nownownow.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline"
+            >
+              Now page movement
+            </a>
+            —a simple way to share what you're focused on right now.
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose p {
+    @apply mb-6;
+  }
+
+  .prose h2 {
+    @apply text-h2;
+  }
+
+  .prose ul {
+    @apply pl-6 space-y-2;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose a {
+    @apply text-text underline decoration-border hover:decoration-accent transition-colors;
+  }
+
+  .prose em {
+    @apply italic;
+  }
+</style>

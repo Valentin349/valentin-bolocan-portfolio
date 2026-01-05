@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../utils/date';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={`${post.data.title} - Your Name`}
+  description={post.data.title}
+>
+  <article class="max-w-4xl mx-auto px-6 py-16">
+    <header class="mb-12">
+      <a
+        href="/"
+        class="inline-block mb-8 text-text-muted hover:text-text transition-colors"
+      >
+        ← Back to timeline
+      </a>
+
+      <h1 class="mb-4">{post.data.title}</h1>
+
+      <div class="flex flex-wrap gap-4 items-center text-sm text-text-muted">
+        <time datetime={post.data.publishDate.toISOString()}>
+          {formatDate(post.data.publishDate)}
+        </time>
+
+        {post.data.readingTime && (
+          <span>{post.data.readingTime} min read</span>
+        )}
+
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex gap-2">
+            {post.data.tags.map((tag) => (
+              <span class="px-3 py-1 bg-surface rounded-full text-xs">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-text;
+  }
+
+  .prose :global(h2) {
+    @apply text-h2 mt-12 mb-4;
+  }
+
+  .prose :global(h3) {
+    @apply text-h3 mt-8 mb-3;
+  }
+
+  .prose :global(p) {
+    @apply mb-6;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    @apply mb-6 pl-6 space-y-2;
+  }
+
+  .prose :global(li) {
+    @apply mb-2;
+  }
+
+  .prose :global(a) {
+    @apply text-text underline decoration-border hover:decoration-accent transition-colors;
+  }
+
+  .prose :global(blockquote) {
+    @apply border-l-2 border-accent pl-6 italic text-text-muted my-6;
+  }
+
+  .prose :global(code) {
+    @apply font-mono text-sm bg-surface px-1.5 py-0.5 rounded;
+  }
+
+  .prose :global(pre) {
+    @apply font-mono text-sm bg-surface p-4 rounded-lg overflow-x-auto my-6;
+  }
+
+  .prose :global(pre code) {
+    @apply bg-transparent p-0;
+  }
+
+  .prose :global(img) {
+    @apply rounded-lg my-8;
+  }
+
+  .prose :global(strong) {
+    @apply font-semibold text-text;
+  }
+
+  .prose :global(em) {
+    @apply italic;
+  }
+</style>

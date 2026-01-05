@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatMonthYear } from '../../utils/date';
+import { getStatusBadgeColor, getSizeBadge } from '../../utils/timeline';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const hasContent = Content !== undefined;
+---
+
+<BaseLayout
+  title={`${project.data.title} - Your Name`}
+  description={project.data.shortDescription}
+>
+  <article class="max-w-4xl mx-auto px-6 py-16">
+    <header class="mb-12">
+      <a
+        href="/"
+        class="inline-block mb-8 text-text-muted hover:text-text transition-colors"
+      >
+        ← Back to timeline
+      </a>
+
+      <h1 class="mb-4">{project.data.title}</h1>
+
+      <p class="text-xl text-text-muted mb-6 leading-relaxed">
+        {project.data.shortDescription}
+      </p>
+
+      <!-- Badges -->
+      <div class="flex gap-2 flex-wrap mb-6">
+        <span class="px-3 py-1 bg-background text-text-muted text-sm rounded-full border border-border">
+          Project
+        </span>
+        <span class={`px-3 py-1 text-sm rounded-full ${getStatusBadgeColor(project.data.status)}`}>
+          {project.data.status.replace('-', ' ')}
+        </span>
+        <span class="px-3 py-1 bg-background text-text-muted text-sm rounded-full border border-border">
+          {getSizeBadge(project.data.size)}
+        </span>
+      </div>
+
+      <!-- Timeline -->
+      <div class="text-sm text-text-muted mb-6">
+        <span>{formatMonthYear(project.data.startDate)}</span>
+        {project.data.endDate && (
+          <>
+            <span class="mx-2">→</span>
+            <span>{formatMonthYear(project.data.endDate)}</span>
+          </>
+        )}
+        {!project.data.endDate && project.data.status === 'in-progress' && (
+          <>
+            <span class="mx-2">→</span>
+            <span>Present</span>
+          </>
+        )}
+      </div>
+
+      <!-- Tech Stack -->
+      {project.data.techStack.length > 0 && (
+        <div class="mb-6">
+          <p class="text-sm text-text-muted mb-2">Tech Stack:</p>
+          <div class="flex gap-2 flex-wrap">
+            {project.data.techStack.map((tech) => (
+              <span class="px-3 py-1 bg-surface text-text text-sm rounded border border-border font-mono">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Links -->
+      <div class="flex gap-4">
+        {project.data.liveUrl && (
+          <a
+            href={project.data.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text hover:text-accent transition-colors"
+          >
+            Live Site →
+          </a>
+        )}
+        {project.data.githubUrl && (
+          <a
+            href={project.data.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-text hover:text-accent transition-colors"
+          >
+            GitHub →
+          </a>
+        )}
+      </div>
+    </header>
+
+    {hasContent && (
+      <div class="prose">
+        <Content />
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-text;
+  }
+
+  .prose :global(h2) {
+    @apply text-h2 mt-12 mb-4;
+  }
+
+  .prose :global(h3) {
+    @apply text-h3 mt-8 mb-3;
+  }
+
+  .prose :global(p) {
+    @apply mb-6;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    @apply mb-6 pl-6 space-y-2;
+  }
+
+  .prose :global(li) {
+    @apply mb-2;
+  }
+
+  .prose :global(a) {
+    @apply text-text underline decoration-border hover:decoration-accent transition-colors;
+  }
+
+  .prose :global(blockquote) {
+    @apply border-l-2 border-accent pl-6 italic text-text-muted my-6;
+  }
+
+  .prose :global(code) {
+    @apply font-mono text-sm bg-surface px-1.5 py-0.5 rounded;
+  }
+
+  .prose :global(pre) {
+    @apply font-mono text-sm bg-surface p-4 rounded-lg overflow-x-auto my-6;
+  }
+
+  .prose :global(pre code) {
+    @apply bg-transparent p-0;
+  }
+
+  .prose :global(strong) {
+    @apply font-semibold text-text;
+  }
+</style>
