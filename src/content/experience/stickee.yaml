@@ -1,0 +1,10 @@
+role: Software engineer
+company: Stickee
+note: acquired by Opensignal
+start: Jan 2024
+end: Mar 2026
+sort: 2024-01-01     # only used for ordering, newest first
+description: >-
+  I built concurrent retailer scrapers that got past captchas, Cloudflare checks and request blocking.
+  I also worked on high-volume data pipelines and owned a core product.
+tags: [PHP, Selenium, Python]

@@ -1,0 +1,277 @@
+/* Copied from the Build Log design system (components/bundle.css). Keep the two in sync: change it there, then copy it here. */
+/* Build Log component styles, after jakub.kr: one quiet column, pure greys, weight over size.
+   Separation rule: a surface with the same fill as its parent gets the 1px color-border-subtle hairline;
+   a surface with a different fill gets no border. Never both, never neither.
+   No fades, no entrance animation, no hover lift. Screenshots never move. */
+
+.bl-root, .bl-root * { box-sizing: border-box; }
+.bl-root {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.625;
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: none;
+  text-align: start;
+}
+/* :where() keeps this reset at class-level specificity, so component rules such as .bl-btn-primary win */
+.bl-root :where(a) { color: inherit; text-decoration: none; }
+.bl-root img { max-width: 100%; display: block; }
+.bl-root p { text-wrap: pretty; margin: 0; }
+.bl-root :focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+.bl-root button, .bl-root a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+/* ---------- page frame: one column on the page fill, nothing above it ---------- */
+.bl-column { max-width: 880px; margin-inline: auto; padding: var(--space-12) var(--space-6); }
+@media (min-width: 640px) { .bl-column { padding-block: var(--space-24); } }
+.bl-stack > * + * { margin-block-start: var(--space-16); }
+@media (min-width: 640px) { .bl-stack > * + * { margin-block-start: var(--space-32); } }
+
+/* ---------- type helpers ---------- */
+.bl-display { font-family: var(--font-display); font-size: clamp(2.75rem, 1.6rem + 5vw, 4.5rem); line-height: 0.95; font-weight: 800; letter-spacing: -0.03em; font-stretch: 112%; text-wrap: balance; margin: 0; }
+.bl-title { font-size: 1.25rem; line-height: 1.4; font-weight: 500; letter-spacing: -0.01em; text-wrap: balance; margin: 0; }
+.bl-data { font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.bl-muted { color: var(--color-text-secondary); }
+.bl-prose { color: var(--color-text-paragraph); }
+.bl-small { font-size: 0.875rem; line-height: 1.43; }
+.bl-inline-link {
+  color: var(--color-text-primary); font-weight: 450;
+  text-decoration-line: underline; text-decoration-thickness: from-font; text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition-property: text-decoration-color; transition-duration: 200ms; transition-timing-function: ease;
+}
+@media (hover: hover) { .bl-inline-link:hover { text-decoration-color: var(--color-text-secondary); } }
+
+/* ---------- Button: pills. Primary is solid, secondary is a fill (no border), ghost is text ---------- */
+.bl-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1);
+  min-height: 36px; max-width: 100%;
+  font-family: var(--font-sans); font-size: 0.875rem; line-height: 1.2; font-weight: 500;
+  padding-block: var(--space-2); padding-inline: var(--space-4) calc(var(--space-4) - 4px);
+  border-radius: var(--radius-pill); border: 0; cursor: pointer; text-decoration: none; user-select: none;
+  transition-property: background-color, color, scale; transition-duration: 200ms; transition-timing-function: ease-out;
+}
+.bl-btn:not(.bl-btn-has-arrow) { padding-inline: var(--space-4); }
+.bl-btn svg { width: 1rem; height: 1rem; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bl-btn svg path { vector-effect: non-scaling-stroke; }
+.bl-btn:not(:disabled):not([aria-disabled="true"]):active { scale: 0.97; }
+.bl-btn-primary { background: var(--color-solid); color: var(--color-text-on-solid); }
+.bl-btn-secondary { background: var(--color-bg-fill-strong); color: var(--color-text-primary); }
+.bl-btn-ghost { background: transparent; color: var(--color-text-primary); padding-inline: 0; min-height: 32px; font-weight: 450; }
+.bl-btn-ghost svg { stroke: var(--color-text-tertiary); }
+.bl-btn-ghost .bl-btn-label {
+  text-decoration-line: underline; text-decoration-thickness: from-font; text-underline-offset: 3px; text-decoration-color: transparent;
+  transition-property: text-decoration-color; transition-duration: 200ms; transition-timing-function: ease;
+}
+@media (hover: hover) {
+  .bl-btn-primary:hover { background: var(--color-solid-hover); }
+  .bl-btn-secondary:hover { background: var(--color-bg-fill-hover); }
+  .bl-btn-ghost:hover .bl-btn-label { text-decoration-color: var(--color-text-secondary); }
+}
+.bl-btn-sm { min-height: 32px; padding-inline: var(--space-3) calc(var(--space-3) - 2px); }
+.bl-btn-sm:not(.bl-btn-has-arrow) { padding-inline: var(--space-3); }
+.bl-btn-ghost.bl-btn-sm { padding-inline: 0; } /* a ghost button is text: no inline padding at any size */
+.bl-btn[disabled], .bl-btn[aria-disabled="true"] { background: var(--color-bg-fill); color: var(--color-text-secondary); cursor: not-allowed; }
+[dir="rtl"] .bl-btn svg.bl-dir { scale: -1 1; }
+
+/* ---------- StatusBadge: no surface, a dot and a word ---------- */
+.bl-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; line-height: 1.43; font-weight: 450; white-space: nowrap; }
+.bl-badge-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.bl-badge-live { color: var(--color-live-text); } .bl-badge-live .bl-badge-dot { background: var(--color-live-solid); }
+.bl-badge-building { color: var(--color-building-text); } .bl-badge-building .bl-badge-dot { background: var(--color-building-solid); }
+.bl-badge-early { color: var(--color-early-text); } .bl-badge-early .bl-badge-dot { background: var(--color-early-solid); }
+.bl-badge-paused { color: var(--color-paused-text); } .bl-badge-paused .bl-badge-dot { background: var(--color-paused-solid); }
+
+/* ---------- Chip: a fill, no border ---------- */
+.bl-chip {
+  display: inline-flex; align-items: center; min-height: 26px;
+  font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1; font-weight: 400;
+  padding-block: 5px; padding-inline: var(--space-2); border-radius: var(--radius-sm); border: 0;
+  color: var(--color-text-secondary); background: var(--color-bg-fill); white-space: nowrap;
+}
+.bl-chip-button {
+  cursor: pointer; border-radius: var(--radius-pill); padding-inline: var(--space-3); min-height: 32px; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 450;
+  transition-property: background-color, color, scale; transition-duration: 200ms; transition-timing-function: ease-out;
+}
+@media (hover: hover) { .bl-chip-button:hover { background: var(--color-bg-fill-hover); color: var(--color-text-primary); } }
+.bl-chip-button:active { scale: 0.97; }
+.bl-chip-button[aria-pressed="true"] { background: var(--color-solid); color: var(--color-text-on-solid); }
+.bl-chip-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+/* ---------- Metric ---------- */
+.bl-metric { display: grid; gap: 2px; min-width: 0; }
+.bl-metric-value { font-family: var(--font-mono); font-size: 1.25rem; line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; color: var(--color-text-primary); }
+.bl-metric-label { font-size: 0.875rem; line-height: 1.43; color: var(--color-text-secondary); }
+.bl-metric-note { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.3; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+/* same fill as the page, so it takes the hairline */
+.bl-metric-row { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-12); padding: var(--space-4) var(--space-6); background: var(--color-bg-page); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+
+/* ---------- SectionHeader: a medium-weight line, no rule ---------- */
+.bl-section { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-1) var(--space-6); margin-block-end: var(--space-3); }
+.bl-section h2, .bl-section h3 { margin: 0; font-size: 1rem; line-height: 1.375; font-weight: 500; color: var(--color-text-primary); }
+.bl-section-meta { font-size: 0.875rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+
+/* ---------- tile and avatar: page fill, so the hairline; concentric radii ---------- */
+.bl-icon { flex: none; display: grid; place-items: center; padding: 3px; border-radius: var(--radius-sm); background: var(--color-bg-page); border: 1px solid var(--color-border-subtle); }
+.bl-icon-inner { width: 40px; height: 48px; border-radius: var(--radius-xs); overflow: hidden; display: grid; place-items: center; background: var(--color-bg-fill); color: var(--color-text-secondary); font-size: 1rem; font-weight: 500; }
+.bl-icon-inner img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.bl-avatar { width: 44px; height: 44px; flex: none; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: var(--color-bg-fill); color: var(--color-text-secondary); font-size: 1.125rem; font-weight: 500; }
+.bl-avatar img { width: 100%; height: 100%; object-fit: cover; }
+/* images are content: every one takes the inset outline */
+.bl-icon-inner img, .bl-avatar img, .bl-frame-screen img, .bl-row-thumb img { outline: 1px solid var(--color-image-outline); outline-offset: -1px; }
+.bl-avatar img { border-radius: 50%; }
+
+/* ---------- ProfileHeader ---------- */
+.bl-profile { display: grid; gap: var(--space-4); }
+.bl-profile-top { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-6); margin-block-end: var(--space-2); }
+.bl-profile-ident { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.bl-profile-name { margin: 0; font-family: var(--font-display); font-size: clamp(2.75rem, 1.6rem + 5vw, 4.5rem); line-height: 0.95; font-weight: 800; letter-spacing: -0.03em; font-stretch: 112%; text-wrap: balance; }
+.bl-profile-role { color: var(--color-text-secondary); font-weight: 450; line-height: 1.375; }
+.bl-profile-bio, .bl-profile-prev { color: var(--color-text-paragraph); }
+.bl-profile-now { color: var(--color-text-secondary); }
+.bl-profile-now b { color: var(--color-text-primary); font-weight: 500; }
+.bl-profile-links { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin: 0; padding: 0; list-style: none; }
+/* contact links with their icon: the icon in tertiary grey, both turn primary on hover */
+.bl-profile-link { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 32px; font-weight: 450; color: var(--color-text-primary); transition-property: color; transition-duration: 200ms; transition-timing-function: ease-out; }
+.bl-profile-link svg { width: 16px; height: 16px; flex: none; stroke: var(--color-text-tertiary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition-property: stroke; transition-duration: 200ms; transition-timing-function: ease-out; }
+@media (hover: hover) { .bl-profile-link:hover svg { stroke: var(--color-text-primary); } }
+
+/* ---------- ProductRow: borderless rows, hover fill, the tile carries the picture ---------- */
+.bl-rows { display: flex; flex-direction: column; gap: var(--space-2); container-type: inline-size; list-style: none; margin: 0; padding: 0; }
+.bl-row {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-4);
+  padding: var(--space-2); margin-inline: calc(-1 * var(--space-2)); border-radius: var(--radius-lg);
+  color: inherit; text-decoration: none; min-width: 0;
+  transition-property: background-color; transition-duration: 200ms; transition-timing-function: ease-out;
+}
+@media (hover: hover) { a.bl-row:hover { background: var(--color-bg-fill); } }
+.bl-row-main { display: flex; flex-direction: column; min-width: 0; }
+.bl-row-title { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-3); }
+.bl-row-name { font-weight: 450; color: var(--color-text-primary); }
+.bl-row-tagline { color: var(--color-text-secondary); }
+.bl-row-metric { font-size: 0.875rem; line-height: 1.43; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.bl-row-metric b { color: var(--color-text-primary); font-weight: 500; font-family: var(--font-mono); font-size: 0.8125rem; }
+.bl-row-side { display: flex; align-items: center; gap: var(--space-3); }
+.bl-row-thumbs { display: flex; gap: var(--space-1); }
+@container (width < 520px) { .bl-row-thumbs { display: none; } }
+.bl-row-thumb { display: block; width: 22px; height: 40px; border-radius: 4px; overflow: hidden; background: var(--color-bg-fill); }
+.bl-row-thumb-browser { width: 56px; height: 36px; }
+.bl-row-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 4px; }
+.bl-row-arrow { width: 16px; height: 16px; stroke: var(--color-text-tertiary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition-property: stroke; transition-duration: 200ms; transition-timing-function: ease-out; }
+.bl-row-arrow path { vector-effect: non-scaling-stroke; }
+@media (hover: hover) { a.bl-row:hover .bl-row-arrow { stroke: var(--color-text-primary); } }
+[dir="rtl"] .bl-row-arrow { scale: -1 1; }
+
+/* ---------- StageFrame: page fill + hairline; the screen is an image with its inset outline ---------- */
+/* align-content: start keeps the device at its screen's height even when a neighbour's longer caption makes the row taller */
+.bl-frame { margin: 0; display: grid; align-content: start; gap: var(--space-3); width: var(--bl-frame-w, 200px); max-width: 100%; flex: none; }
+.bl-frame-device { position: relative; background: var(--color-bg-page); border: 1px solid var(--color-border-subtle); overflow: hidden; }
+.bl-frame-screen { position: relative; overflow: hidden; background: var(--color-bg-fill); }
+.bl-frame-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+/* phone: outer radius = screen radius + bezel padding + 1px border (concentric) */
+.bl-frame-phone .bl-frame-device { --bl-bezel: calc(var(--bl-frame-w, 200px) * 0.03); --bl-screen-r: calc(var(--bl-frame-w, 200px) * 0.13); padding: var(--bl-bezel); border-radius: calc(var(--bl-screen-r) + var(--bl-bezel) + 1px); }
+.bl-frame-phone .bl-frame-screen { aspect-ratio: 390 / 844; border-radius: var(--bl-screen-r); }
+.bl-frame-phone .bl-frame-screen img { border-radius: var(--bl-screen-r); }
+/* browser: 3px padding like the product tile, a quiet bar, concentric corners */
+.bl-frame-browser .bl-frame-device { padding: 3px; border-radius: calc(var(--radius-md) + 4px); }
+.bl-frame-bar { display: flex; align-items: center; gap: 5px; height: 24px; padding-inline: var(--space-2); }
+.bl-frame-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--color-bg-fill-hover); }
+.bl-frame-url { margin-inline-start: var(--space-2); font-family: var(--font-mono); font-size: 0.6875rem; color: var(--color-text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bl-frame-browser .bl-frame-screen { aspect-ratio: 16 / 10; border-radius: var(--radius-md); }
+.bl-frame-browser .bl-frame-screen img { border-radius: var(--radius-md); }
+.bl-frame-cap { display: grid; gap: 2px; min-width: 0; }
+.bl-frame-tag { font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.4; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+.bl-frame-tag b { color: var(--color-text-primary); font-weight: 500; }
+.bl-frame-text { font-size: 0.875rem; line-height: 1.43; color: var(--color-text-secondary); }
+
+/* ---------- BuildStrip: a horizontal strip with a visible scrollbar and side buttons; no box around it ---------- */
+.bl-strip { position: relative; min-width: 0; }
+.bl-strip-track {
+  display: flex; gap: var(--space-4); margin: 0; padding: 1px 1px var(--space-4); list-style: none;
+  overflow-x: auto; scroll-snap-type: x proximity; overscroll-behavior-x: contain;
+  scrollbar-width: thin; scrollbar-color: var(--color-text-tertiary) var(--color-bg-fill);
+}
+.bl-strip-track::-webkit-scrollbar { height: 8px; }
+.bl-strip-track::-webkit-scrollbar-track { background: var(--color-bg-fill); border-radius: var(--radius-pill); }
+.bl-strip-track::-webkit-scrollbar-thumb { background: var(--color-text-tertiary); border-radius: var(--radius-pill); }
+.bl-strip-track:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 4px; border-radius: var(--radius-sm); }
+.bl-strip-item { flex: none; scroll-snap-align: start; max-width: calc(100% - 48px); } /* the next frame always peeks past the edge */
+/* side buttons: page fill, so the hairline; centred on the screens, half outside the strip */
+.bl-strip-nav {
+  position: absolute; inset-block-start: 40%; translate: 0 -50%; z-index: 1;
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0; cursor: pointer;
+  border-radius: var(--radius-pill); background: var(--color-bg-page); border: 1px solid var(--color-border-subtle); color: var(--color-text-primary);
+  transition-property: scale, color; transition-duration: 200ms; transition-timing-function: ease-out;
+}
+.bl-strip-nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bl-strip-prev { inset-inline-start: -20px; }
+.bl-strip-next { inset-inline-end: -20px; }
+.bl-strip-nav:active { scale: 0.97; }
+.bl-strip-nav:disabled { visibility: hidden; }
+.bl-strip-nav:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+[dir="rtl"] .bl-strip-nav svg { scale: -1 1; }
+/* touch screens swipe; the scrollbar still shows where you are */
+@media (hover: none) { .bl-strip-nav { display: none; } }
+
+/* ---------- ProductCard: page fill + hairline ---------- */
+.bl-card {
+  display: grid; gap: var(--space-6); padding: var(--space-4); min-width: 0; container-type: inline-size;
+  background: var(--color-bg-page); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg);
+}
+.bl-card-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-4); align-items: center; }
+.bl-card-ident { display: flex; flex-direction: column; min-width: 0; }
+.bl-card-name { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--space-3); min-width: 0; }
+.bl-card-name .bl-title a { text-decoration-line: underline; text-decoration-thickness: from-font; text-underline-offset: 3px; text-decoration-color: transparent; transition-property: text-decoration-color; transition-duration: 200ms; }
+@media (hover: hover) { .bl-card-name .bl-title a:hover { text-decoration-color: var(--color-text-secondary); } }
+.bl-card-since { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--color-text-secondary); }
+.bl-card-tagline { margin: 0; color: var(--color-text-secondary); }
+.bl-card-meta { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4) var(--space-6); }
+.bl-card-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-6); }
+.bl-card-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-6); }
+/* the empty state is a fill, so no border */
+.bl-card-empty { margin: 0; padding: var(--space-4); border-radius: var(--radius-md); background: var(--color-bg-fill); color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.43; }
+.bl-card-empty b { color: var(--color-text-primary); font-weight: 500; display: block; }
+@container (width >= 560px) { .bl-card { padding: var(--space-6); } }
+
+/* ---------- TimelineEntry: the writing-list look, a hairline rail ---------- */
+.bl-timeline { list-style: none; margin: 0; padding: 0; display: grid; container-type: inline-size; }
+.bl-entry { --bl-gutter: 88px; position: relative; display: grid; grid-template-columns: var(--bl-gutter) minmax(0, 1fr); gap: var(--space-4); padding-block: var(--space-3); min-width: 0; }
+@container (width >= 560px) { .bl-entry { --bl-gutter: 168px; } } /* fits a range like "Jun 2025–present" */
+.bl-entry::before { content: ""; position: absolute; inset-inline-start: calc(var(--bl-gutter) + 3px); inset-block: 0; width: 1px; background: var(--color-border-separator); }
+.bl-timeline .bl-entry:first-child::before { inset-block-start: calc(var(--space-3) + 10px); }
+.bl-timeline .bl-entry:last-child::before { inset-block-end: auto; height: calc(var(--space-3) + 10px); }
+/* an undated timeline: no date column, the rail sits at the start */
+.bl-timeline-undated .bl-entry { --bl-gutter: 0px; grid-template-columns: minmax(0, 1fr); }
+.bl-timeline-undated .bl-entry-body { padding-inline-start: var(--space-8, 32px); }
+/* a project logo in place of the dot: centred on the rail, with page fill around it so the rail breaks */
+.bl-entry-logo { position: absolute; inset-inline-start: calc(var(--bl-gutter) + 3.5px - 12px); inset-block-start: calc(var(--space-3) - 1px); z-index: 1; display: grid; place-items: center; width: 24px; height: 24px; background: var(--color-bg-page); }
+.bl-entry-logo .bl-icon-mark { width: 16px; height: 16px; }
+/* dates at the end of the title line, when the timeline has no date column */
+.bl-entry-when { margin-inline-start: auto; padding-inline-start: var(--space-4); font-family: var(--font-mono); font-size: 0.8125rem; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* on narrow screens the dates take their own line under the title, aligned to the start */
+@container (width < 560px) { .bl-entry-when { margin-inline-start: 0; padding-inline-start: 0; flex-basis: 100%; } }
+.bl-entry-body > .bl-btn-ghost { justify-self: start; }
+.bl-entry-date { padding-inline-end: var(--space-4); font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.4; color: var(--color-text-secondary); font-variant-numeric: tabular-nums; padding-block-start: 3px; }
+.bl-entry-date b { color: var(--color-text-primary); font-weight: 400; }
+.bl-entry-mark { position: absolute; inset-inline-start: var(--bl-gutter); inset-block-start: calc(var(--space-3) + 8px); width: 7px; height: 7px; border-radius: 50%; background: var(--color-border-separator); z-index: 1; }
+.bl-entry-launch .bl-entry-mark { background: var(--color-live-solid); }
+.bl-entry-current .bl-entry-mark { background: var(--color-text-primary); }
+.bl-entry-body { display: grid; gap: var(--space-1); padding-inline-start: var(--space-4); min-width: 0; }
+.bl-entry-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-2); line-height: 1.375; }
+.bl-entry-title h3 { margin: 0; font-size: 1rem; line-height: 1.375; font-weight: 450; }
+.bl-entry-link { text-decoration-line: underline; text-decoration-thickness: from-font; text-underline-offset: 3px; text-decoration-color: transparent; transition-property: text-decoration-color; transition-duration: 200ms; }
+@media (hover: hover) { .bl-entry-link:hover { text-decoration-color: var(--color-text-secondary); } }
+.bl-entry-org, .bl-entry-kind { color: var(--color-text-secondary); }
+.bl-entry-kind { font-size: 0.875rem; }
+.bl-entry-desc { margin: 0; color: var(--color-text-secondary); }
+
+/* ---------- motion: press feedback, colour on hover, the strip's scroll ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .bl-strip-track { scroll-behavior: smooth; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bl-root *, .bl-root *::before, .bl-root *::after { transition-duration: 0.01ms !important; }
+  .bl-btn:not(:disabled):active, .bl-chip-button:active { scale: 1; }
+}

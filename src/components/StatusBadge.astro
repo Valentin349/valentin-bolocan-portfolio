@@ -1,0 +1,6 @@
+---
+interface Props { status: 'live' | 'building' | 'early' | 'paused'; label?: string }
+const { status, label } = Astro.props;
+const words = { live: 'Live', building: 'Building', early: 'Early', paused: 'Paused' };
+---
+<span class={`bl-badge bl-badge-${status}`}><i class="bl-badge-dot" aria-hidden="true"></i>{label ?? words[status]}</span>

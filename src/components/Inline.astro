@@ -1,0 +1,14 @@
+---
+// Renders a list of text and {text, href} parts as one run of text with inline links.
+import { url, isExternal } from '../lib/url';
+type Part = string | { text: string; href: string };
+interface Props { parts: Part[] }
+const { parts } = Astro.props;
+---
+{parts.map((p) =>
+  typeof p === 'string' ? p : (
+    <a class="bl-inline-link" href={url(p.href)} target={isExternal(p.href) ? '_blank' : undefined} rel={isExternal(p.href) ? 'noopener noreferrer' : undefined}>
+      {p.text}{isExternal(p.href) && <span class="sr-only"> (opens in a new tab)</span>}
+    </a>
+  )
+)}

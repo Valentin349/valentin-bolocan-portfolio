@@ -1,0 +1,8 @@
+---
+interface Props { title: string; meta?: string; id?: string }
+const { title, meta, id } = Astro.props;
+---
+<header class="bl-section">
+  <h2 id={id}>{title}</h2>
+  {meta && <div class="bl-section-meta">{meta}</div>}
+</header>

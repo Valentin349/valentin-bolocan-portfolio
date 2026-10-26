@@ -1,0 +1,31 @@
+---
+// One row of the timeline: the project's logo on the rail (a dot without one), the title, and an optional line and link. No dates.
+import Icon from './Icon.astro';
+import { url } from '../lib/url';
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+interface Props { entry: CollectionEntry<'timeline'>; logo?: ImageMetadata }
+const { entry, logo } = Astro.props;
+const e = entry.data;
+const kindLabel = { job: 'Role', launch: 'Launch', note: 'Note' }[e.kind];
+const href = e.project ? url(`/projects/${e.project}`) : undefined;
+---
+<li class:list={['bl-entry', `bl-entry-${e.kind}`, e.current && 'bl-entry-current']}>
+  {logo
+    ? <span class="bl-entry-logo" aria-hidden="true"><span class="bl-icon-mark" style={`--mark: url("${logo.src}")`}></span></span>
+    : <i class="bl-entry-mark" aria-hidden="true"></i>}
+  <div class="bl-entry-body">
+    <div class="bl-entry-title">
+      <h3>{href ? <a class="bl-entry-link" href={href}>{e.title}</a> : e.title}</h3>
+      {e.org && <span class="bl-entry-org">{e.org}</span>}
+      <span class="bl-entry-kind">{kindLabel}</span>
+    </div>
+    {e.description && <p class="bl-entry-desc">{e.description}</p>}
+    {e.link && (
+      <a class="bl-btn bl-btn-ghost bl-btn-sm bl-btn-has-arrow" href={e.link.href} target="_blank" rel="noopener noreferrer">
+        <span class="bl-btn-label">{e.link.label}</span><Icon name="arrow-up-right" /><span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    )}
+    {e.tags.length > 0 && <ul class="bl-chip-row" style="list-style:none;margin:0;padding:0">{e.tags.map((t) => <li class="bl-chip">{t}</li>)}</ul>}
+  </div>
+</li>

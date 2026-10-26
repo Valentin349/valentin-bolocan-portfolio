@@ -1,0 +1,10 @@
+role: Founding engineer
+company: Ascense AI
+start: Mar 2026
+end: null            # null shows "present"
+sort: 2026-03-01     # only used for ordering, newest first
+description: >-
+  I build the AI agent that coaches and supports delivery drivers over WhatsApp,
+  and the tools around it: the context layer it draws on, fleet dashboards,
+  SOP onboarding for new partners and n8n automations.
+tags: [Python, Next.js, Supabase, n8n]

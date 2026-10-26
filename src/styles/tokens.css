@@ -1,0 +1,193 @@
+/* Copied from the Build Log design system (generated from tokens.json). Keep in sync with the design system. */
+/* Build Log — generated from tokens.json */
+:root, [data-theme="light"] {
+  --gray-1: #fcfcfc; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-2: #f6f6f6; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-3: #f0f0f0; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-4: #e8e8e8; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-5: #e0e0e0; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-6: #d9d9d9; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-7: #cecece; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-8: #bbbbbb; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-9: #8d8d8d; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-10: #838383; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-11: #6f6f6f; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-12: #202020; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --gray-paragraph: #424242; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --white-or-black: #ffffff; /* Primitive grey (no hue), from jakub.kr. Not used by components directly. */
+  --green-3: oklch(0.950 0.040 150); /* Primitive, step 3: component background / wells. Referenced by a status token only. */
+  --green-7: oklch(0.800 0.090 150); /* Primitive, step 7: border. Referenced by a status token only. */
+  --green-9: oklch(0.600 0.140 150); /* Primitive, step 9: solid fill. Referenced by a status token only. */
+  --green-11: oklch(0.450 0.120 150); /* Primitive, step 11: low-contrast text. Referenced by a status token only. */
+  --amber-3: oklch(0.960 0.036 80); /* Primitive, step 3: component background / wells. Referenced by a status token only. */
+  --amber-7: oklch(0.820 0.100 80); /* Primitive, step 7: border. Referenced by a status token only. */
+  --amber-9: oklch(0.630 0.130 80); /* Primitive, step 9: solid fill. Referenced by a status token only. */
+  --amber-11: oklch(0.470 0.098 80); /* Primitive, step 11: low-contrast text. Referenced by a status token only. */
+  --blue-3: oklch(0.960 0.018 260); /* Primitive, step 3: component background / wells. Referenced by a status token only. */
+  --blue-7: oklch(0.820 0.070 260); /* Primitive, step 7: border. Referenced by a status token only. */
+  --blue-9: oklch(0.550 0.170 260); /* Primitive, step 9: solid fill. Referenced by a status token only. */
+  --blue-11: oklch(0.450 0.150 260); /* Primitive, step 11: low-contrast text. Referenced by a status token only. */
+  --color-bg-page: var(--gray-1); /* Page background, and the fill of every card, frame and tile that sits on it. Same fill as the page, so those surfaces carry color-border-subtle. */
+  --color-bg-fill: var(--gray-2); /* A filled surface with no border: a hovered row, a chip, the empty strip well. Different fill from the page, so no border. */
+  --color-bg-fill-strong: var(--gray-3); /* A filled control with no border: the secondary button. Hover goes one step darker to color-bg-fill-hover. */
+  --color-bg-fill-hover: var(--gray-4); /* Hover fill of the secondary button and pressed chips. */
+  --color-bg-raised: var(--white-or-black); /* Popovers and menus. With color-border-subtle. */
+  --color-text-primary: var(--gray-12); /* Names, headings, link text, values. */
+  --color-text-paragraph: var(--gray-paragraph); /* Running prose: bio and project-page paragraphs. */
+  --color-text-secondary: var(--gray-11); /* Taglines, roles, dates, captions, metric labels. 4.5:1 on page and fill. */
+  --color-text-tertiary: var(--gray-10); /* Icons and arrows beside text only (3:1). Never for words. */
+  --color-text-on-solid: var(--gray-1); /* Text on color-solid (the primary button, a pressed filter chip). */
+  --color-border-subtle: #0000000f; /* The one hairline: on every surface whose fill matches what it sits on (cards, frames, tiles, avatar, metric row, empty state). Never on a filled surface. */
+  --color-border-subtle-hover: #00000014; /* The hairline of a linked card under a hover-capable pointer. */
+  --color-border-separator: var(--gray-4); /* Lines that are not edges: the timeline rail, the stage rail, the rule above a card footer. */
+  --color-border-focus: var(--gray-11); /* The 2px focus ring, offset 2px. */
+  --color-solid: var(--gray-12); /* The one primary button per view and a pressed filter chip. Text on it is color-text-on-solid. */
+  --color-solid-hover: var(--gray-paragraph); /* The primary button on hover. */
+  --color-image-outline: #0000001a; /* The 1px inset outline on every screenshot and photo, so a white screen still reads against a white frame. */
+  --color-live-solid: var(--green-9); /* The Live dot. 3:1 on page and fill. */
+  --color-live-text: var(--green-11); /* The Live word beside its dot. 4.5:1 on page and fill. */
+  --color-building-solid: var(--amber-9); /* The Building dot. 3:1 on page and fill. */
+  --color-building-text: var(--amber-11); /* The Building word beside its dot. 4.5:1 on page and fill. */
+  --color-early-solid: var(--blue-9); /* The Early dot. 3:1 on page and fill. */
+  --color-early-text: var(--blue-11); /* The Early word beside its dot. 4.5:1 on page and fill. */
+  --color-paused-solid: var(--gray-9); /* The Paused dot. */
+  --color-paused-text: var(--gray-11); /* The Paused word. */
+  --shadow-popover: 0 8px 24px -8px rgba(0, 0, 0, 0.12); /* Popovers and menus only, with the hairline. Never on cards or screenshots. */
+}
+[data-theme="dark"] {
+  --gray-1: #101010;
+  --gray-2: #191919;
+  --gray-3: #222222;
+  --gray-4: #252525;
+  --gray-5: #313131;
+  --gray-6: #3a3a3a;
+  --gray-7: #484848;
+  --gray-8: #606060;
+  --gray-9: #6e6e6e;
+  --gray-10: #7b7b7b;
+  --gray-11: #b5b5b5;
+  --gray-12: #eeeeee;
+  --gray-paragraph: #dbdbdb;
+  --white-or-black: #0b0b0b;
+  --green-3: oklch(0.250 0.050 150);
+  --green-7: oklch(0.420 0.090 150);
+  --green-9: oklch(0.650 0.150 150);
+  --green-11: oklch(0.780 0.130 150);
+  --amber-3: oklch(0.260 0.050 80);
+  --amber-7: oklch(0.450 0.090 80);
+  --amber-9: oklch(0.750 0.150 80);
+  --amber-11: oklch(0.820 0.120 80);
+  --blue-3: oklch(0.250 0.040 260);
+  --blue-7: oklch(0.420 0.080 260);
+  --blue-9: oklch(0.620 0.150 260);
+  --blue-11: oklch(0.780 0.110 260);
+  --color-bg-page: var(--gray-1);
+  --color-bg-fill: var(--gray-2);
+  --color-bg-fill-strong: var(--gray-3);
+  --color-bg-fill-hover: var(--gray-4);
+  --color-bg-raised: var(--white-or-black);
+  --color-text-primary: var(--gray-12);
+  --color-text-paragraph: var(--gray-paragraph);
+  --color-text-secondary: var(--gray-11);
+  --color-text-tertiary: var(--gray-10);
+  --color-text-on-solid: var(--gray-1);
+  --color-border-subtle: #ffffff14;
+  --color-border-subtle-hover: #ffffff21;
+  --color-border-separator: var(--gray-4);
+  --color-border-focus: var(--gray-11);
+  --color-solid: var(--gray-12);
+  --color-solid-hover: var(--gray-11);
+  --color-image-outline: #ffffff1a;
+  --color-live-solid: var(--green-9);
+  --color-live-text: var(--green-11);
+  --color-building-solid: var(--amber-9);
+  --color-building-text: var(--amber-11);
+  --color-early-solid: var(--blue-9);
+  --color-early-text: var(--blue-11);
+  --color-paused-solid: var(--gray-9);
+  --color-paused-text: var(--gray-11);
+  --shadow-popover: 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+}
+:root {
+  --space-1: 4px; /* Dot to word, icon to label. */
+  --space-2: 8px; /* Row padding, gap between list items and chips. */
+  --space-3: 12px; /* Gap between a section heading and its list; between bordered controls. */
+  --space-4: 16px; /* Gap between a tile and its text; card padding on phones; between paragraphs. */
+  --space-6: 24px; /* Page gutter at every width; card padding from 560px. */
+  --space-12: 48px; /* Top and bottom page padding on phones. */
+  --space-16: 64px; /* Between sections on phones. */
+  --space-24: 96px; /* Top and bottom page padding from 640px. */
+  --space-32: 128px; /* Between sections from 640px. */
+  --radius-xs: 5px; /* The screenshot inside a product tile (tile radius 8 minus 3px padding). */
+  --radius-sm: 8px; /* Product tiles, chips, browser frames. */
+  --radius-md: 12px; /* Screens inside browser frames, the empty state. */
+  --radius-lg: 16px; /* Rows (hover fill), product cards, the metric row. */
+  --radius-pill: 9999px; /* Buttons and filter chips. */
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --text-display: 800 72px/0.95 var(--font-display); /* The one title per page: your name on the home page, the product name on a product page. 44px on phones up to 72px (clamp). font-stretch 112%. */
+  --text-title: 500 20px/1.4 var(--font-sans); /* The product name inside a ProductCard. */
+  --text-body: 400 16px/1.625 var(--font-sans); /* Prose in color-text-paragraph; taglines and roles in color-text-secondary. */
+  --text-body-medium: 500 16px/1.375 var(--font-sans); /* Section headings. */
+  --text-body-link: 450 16px/1.375 var(--font-sans); /* Product names in rows, inline links, timeline titles. */
+  --text-small: 400 14px/1.43 var(--font-sans); /* Stage captions, status words, metric labels, button labels. */
+  --text-data: 400 13px/1.4 var(--font-mono); /* Stage tags, dates in the timeline, chips, URLs in a browser bar. Tabular numerals. */
+  --text-metric: 500 20px/1.2 var(--font-mono); /* The one number on a product card or metric row. Tabular numerals. */
+}
+.display {
+  font-family: var(--font-display);
+  font-size: 72px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.title {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.625;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-medium {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.375;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.body-link {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.375;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+.small {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.43;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.data {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.metric {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}

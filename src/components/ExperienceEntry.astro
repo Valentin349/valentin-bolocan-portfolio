@@ -1,0 +1,27 @@
+---
+// One job, in the timeline row style: a marker on the rail, title and organisation, dates at the end of the title line.
+import { url, isExternal } from '../lib/url';
+interface Props {
+  title: string; org: string; href?: string; note?: string;
+  start?: string; end?: string | null; description?: string; tags?: string[]; current?: boolean;
+}
+const { title, org, href, note, start, end, description, tags = [], current = false } = Astro.props;
+---
+<li class:list={['bl-entry', 'bl-entry-job', current && 'bl-entry-current']}>
+  <i class="bl-entry-mark" aria-hidden="true"></i>
+  <div class="bl-entry-body">
+    <div class="bl-entry-title">
+      <h3>{title}</h3>
+      <span class="bl-entry-org">
+        {href ? (
+          <a class="bl-entry-link" href={url(href)} target={isExternal(href) ? '_blank' : undefined} rel={isExternal(href) ? 'noopener noreferrer' : undefined}>
+            {org}{isExternal(href) && <span class="sr-only"> (opens in a new tab)</span>}
+          </a>
+        ) : org}{note && <>, {note}</>}
+      </span>
+      {start && <span class="bl-entry-when">{start}{end !== undefined && <>–{end ?? 'present'}</>}</span>}
+    </div>
+    {description && <p class="bl-entry-desc">{description}</p>}
+    {tags.length > 0 && <ul class="bl-chip-row" style="list-style:none;margin:0;padding:0">{tags.map((t) => <li class="bl-chip">{t}</li>)}</ul>}
+  </div>
+</li>

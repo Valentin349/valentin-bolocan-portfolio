@@ -1,0 +1,50 @@
+---
+import '../styles/tokens.css';
+import '../styles/components.css';
+import '../styles/site.css';
+interface Props { title: string; description: string; image?: string }
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
+    <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:opsz,wght@14..32,100..900&family=Geist+Mono:wght@100..900&display=swap" />
+    <script is:inline>
+      // Follow the system theme. The tokens switch on data-theme; set it before first paint.
+      (function () {
+        var m = window.matchMedia('(prefers-color-scheme: dark)');
+        var apply = function () { document.documentElement.setAttribute('data-theme', m.matches ? 'dark' : 'light'); };
+        apply();
+        m.addEventListener('change', apply);
+      })();
+    </script>
+  </head>
+  <body class="bl-root">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="bl-column">
+      <slot name="nav" />
+      <main id="main" class="bl-stack">
+        <slot />
+      </main>
+      <footer class="site-footer" style="margin-block-start: var(--space-16)">
+        <span>Valentin Bolocan</span>
+        <a class="bl-inline-link" style="font-weight: 400; color: inherit" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/index.md`}>index.md</a>
+      </footer>
+    </div>
+  </body>
+</html>

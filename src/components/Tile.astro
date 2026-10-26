@@ -1,0 +1,15 @@
+---
+// The project tile: the logo as a one-colour mark, else the latest screenshot, else the first letter.
+// The mark is the logo's shape used as a mask over the text colour, so it's black on light and white on dark.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { name: string; icon?: ImageMetadata; latest?: ImageMetadata }
+const { name, icon, latest } = Astro.props;
+---
+<span class="bl-icon" aria-hidden="true">
+  <span class="bl-icon-inner">
+    {icon ? <span class="bl-icon-mark" style={`--mark: url("${icon.src}")`}></span>
+      : latest ? <Image src={latest} alt="" width={96} />
+      : name.charAt(0)}
+  </span>
+</span>

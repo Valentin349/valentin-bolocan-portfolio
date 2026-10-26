@@ -1,15 +1,10 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
 
-// https://astro.build/config
+// Deployed to GitHub Pages as a project site, so every URL lives under the repo name.
+// Use import.meta.env.BASE_URL (or the url() helper in src/lib/url.ts) for internal links.
 export default defineConfig({
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    mdx()
-  ],
+  site: 'https://valentin349.github.io',
+  base: '/valentin-bolocan-portfolio',
   output: 'static',
-  site: 'https://yourusername.github.io', // Update with your domain
+  trailingSlash: 'ignore',
 });

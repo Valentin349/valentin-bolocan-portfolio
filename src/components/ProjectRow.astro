@@ -1,0 +1,35 @@
+---
+import Tile from './Tile.astro';
+import StatusBadge from './StatusBadge.astro';
+import Icon from './Icon.astro';
+import { Image } from 'astro:assets';
+import { url } from '../lib/url';
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'> }
+const { project } = Astro.props;
+const p = project.data;
+const latest = p.stages.at(-1);
+// With an icon in the tile, the last three stages trail the row; without one, the latest fills the tile and the three before it trail.
+const thumbs = p.icon ? p.stages.slice(-3) : p.stages.slice(-4, -1);
+---
+<a class="bl-row" href={url(`/projects/${project.slug}`)}>
+  <Tile name={p.name} icon={p.icon} latest={latest?.src} />
+  <div class="bl-row-main">
+    <div class="bl-row-title">
+      <span class="bl-row-name">{p.name}</span>
+      {p.status === 'live' && <StatusBadge status={p.status} label={p.statusLabel} />}
+    </div>
+    <div class="bl-row-tagline">{p.tagline}</div>
+    {p.metric && <div class="bl-row-metric"><b>{p.metric.value}</b> {p.metric.label}</div>}
+  </div>
+  <div class="bl-row-side">
+    {thumbs.length > 0 && (
+      <div class="bl-row-thumbs" aria-hidden="true">
+        {thumbs.map((s) => (
+          <span class={`bl-row-thumb bl-row-thumb-${s.device}`}><Image src={s.src} alt="" width={112} /></span>
+        ))}
+      </div>
+    )}
+    <Icon name="arrow-right" class="bl-row-arrow" />
+  </div>
+</a>

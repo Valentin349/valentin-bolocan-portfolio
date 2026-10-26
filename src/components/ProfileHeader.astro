@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import Inline from './Inline.astro';
+import Icon from './Icon.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { profile: CollectionEntry<'profile'> }
+const p = Astro.props.profile.data;
+---
+<header class="bl-profile">
+  <div class="bl-profile-top">
+    {p.avatar && <div class="bl-avatar" aria-hidden="true"><Image src={p.avatar} alt="" width={88} /></div>}
+    <div class="bl-profile-ident">
+      <h1 class="bl-profile-name">{p.name}</h1>
+      <div class="bl-profile-role">{p.role}</div>
+    </div>
+  </div>
+  {p.bio.map((para) => <p class="bl-profile-bio"><Inline parts={para} /></p>)}
+  {p.now && <p class="bl-profile-now"><b>Now: </b><Inline parts={p.now} /></p>}
+  {p.links.length > 0 && (
+    <ul class="bl-profile-links">
+      {p.links.map((l) => (
+        <li>
+          <a class="bl-profile-link" href={l.href} target="_blank" rel="noopener noreferrer">
+            {l.icon && <Icon name={l.icon} />}{l.label}<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</header>

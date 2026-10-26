@@ -1,0 +1,31 @@
+/* Page-level rules the design system leaves to the site. */
+html { background: var(--color-bg-page); color-scheme: light dark; -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100dvh; }
+::selection { background: var(--color-bg-fill-hover); }
+
+.skip-link { position: absolute; inset-inline-start: var(--space-4); inset-block-start: -100px; z-index: 10; padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--color-solid); color: var(--color-text-on-solid); font-size: 0.875rem; font-weight: 500; }
+.skip-link:focus-visible { inset-block-start: var(--space-4); }
+
+.site-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-block-end: var(--space-12); font-size: 0.875rem; }
+.site-nav a { color: var(--color-text-secondary); font-weight: 450; display: inline-flex; align-items: center; gap: var(--space-1); min-height: 32px; transition-property: color; transition-duration: 200ms; }
+.site-nav a svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover: hover) { .site-nav a:hover { color: var(--color-text-primary); } }
+[dir="rtl"] .site-nav a svg { scale: -1 1; }
+
+.site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2) var(--space-6); font-size: 0.875rem; color: var(--color-text-secondary); }
+
+/* project page */
+.project-head { display: grid; gap: var(--space-4); }
+.project-head .bl-icon { justify-self: start; }
+.project-tagline { color: var(--color-text-secondary); font-size: 1.125rem; line-height: 1.5; }
+.project-facts { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4) var(--space-6); }
+.project-links { display: flex; flex-wrap: wrap; gap: 0 var(--space-6); }
+.prose { color: var(--color-text-paragraph); }
+/* .bl-root p resets margins at higher specificity, so this rule names .bl-root too */
+.bl-root .prose > * + * { margin-block-start: var(--space-4); }
+.prose a { color: var(--color-text-primary); font-weight: 450; text-decoration-line: underline; text-decoration-thickness: from-font; text-underline-offset: 3px; text-decoration-color: var(--color-text-tertiary); }
+.prose h2 { font-size: 1rem; font-weight: 500; color: var(--color-text-primary); margin-block-start: var(--space-12); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* a logo is a one-colour mark in the text colour: black on light, white on dark */
+.bl-icon-mark { width: 24px; height: 24px; background: var(--color-text-primary); -webkit-mask: var(--mark) center / contain no-repeat; mask: var(--mark) center / contain no-repeat; }

@@ -1,0 +1,19 @@
+name: Valentin Bolocan
+role: Founding engineer at Ascense AI
+description: Valentin Bolocan is a founding engineer at Ascense AI and builds his own products end to end. Poise, Evo and Sideflo, shown stage by stage as they were built.
+bio:
+  - - "I'm a founding engineer at Ascense AI, where I build an AI agent that supports delivery drivers over WhatsApp."
+  # To add a link or an email, swap a plain string for a { text, href } part:
+  #   - { text: LinkedIn, href: "https://www.linkedin.com/in/your-name" }
+  #   - { text: email, href: "mailto:you@example.com" }
+  - - "Previously, I was a software engineer at Stickee, which was acquired by Opensignal, and before that I did freelance web design."
+  - - "I also build my own products end to end. I made "
+    - { text: Poise, href: /projects/poise }
+    - ", a singles and dating events app on the App Store and Google Play. Before that I shipped "
+    - { text: Evo, href: /projects/evo }
+    - ", a habits app with friends, and built "
+    - { text: Sideflo, href: /projects/sideflo }
+    - ", a sports arbitrage scanner."
+links:
+  - { label: LinkedIn, href: "https://www.linkedin.com/in/valentin-bolocan", icon: linkedin }
+  - { label: GitHub, href: "https://github.com/Valentin349", icon: github }
